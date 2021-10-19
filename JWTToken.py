@@ -39,7 +39,10 @@ print("Instance URL", instance_url)
 
 
 def sf_api_call(action, parameters = {}, method = 'get', data = {}):
- 
+    """
+    Helper function to make calls to Salesforce REST API.
+    Parameters: action (the URL), URL params, method (get, post or patch), data for POST/PATCH.
+    """
     headers = {
         'Content-type': 'application/json',
         'Accept-Encoding': 'gzip',
@@ -50,7 +53,7 @@ def sf_api_call(action, parameters = {}, method = 'get', data = {}):
     elif method in ['post', 'patch']:
         r = requests.request(method, instance_url+action, headers=headers, json=data, params=parameters, timeout=10)
     else:
-        # Throw error for unsupported methods
+        # other methods not implemented in this example
         raise ValueError('Method should be get or post or patch.')
     print('Debug: API %s call: %s' % (method, r.url) )
     if r.status_code < 300:
@@ -61,6 +64,6 @@ def sf_api_call(action, parameters = {}, method = 'get', data = {}):
     else:
         raise Exception('API error when calling %s : %s' % (r.url, r.content))
 
-print(json.dumps(sf_api_call('/services/data/v50.0/query/', {
+print(json.dumps(sf_api_call('/services/data/v39.0/query/', {
     'q': 'SELECT Account.Name, Name, CloseDate from Opportunity where IsClosed = False order by CloseDate ASC LIMIT 10'
-    }), indent=2))
+  }), indent=2))
