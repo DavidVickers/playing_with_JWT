@@ -24,7 +24,9 @@ payload = {
     }
     
 encoded = jwt.encode(payload, private_key, algorithm='RS256')
+print('-----------------------------------JWT TOKEN Start-----------------------------------\n' )
 print('JWT:', encoded )
+print('\n-----------------------------------JWT TOKEN END-----------------------------------\n' )
 
 r = requests.post(myurl + '/services/oauth2/token', data = {
     'grant_type': 'urn:ietf:params:oauth:grant-type:jwt-bearer',
@@ -36,7 +38,7 @@ access_token = r.json().get("access_token")
 instance_url = r.json().get("instance_url")
 print("Access Token:", access_token)
 print("Instance URL", instance_url)
-
+print('\n\n')
 
 def sf_api_call(action, parameters = {}, method = 'get', data = {}):
     
