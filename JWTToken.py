@@ -24,9 +24,9 @@ payload = {
     }
     
 encoded = jwt.encode(payload, private_key, algorithm='RS256')
-print('-----------------------------------JWT TOKEN Start-----------------------------------\n' )
+print('-------------------------------------JWT TOKEN Start-----------------------------------\n' )
 print('JWT:', encoded )
-print('\n-----------------------------------JWT TOKEN END-----------------------------------\n' )
+print('\n-----------------------------------JWT TOKEN END-------------------------------------\n' )
 
 r = requests.post(myurl + '/services/oauth2/token', data = {
     'grant_type': 'urn:ietf:params:oauth:grant-type:jwt-bearer',
